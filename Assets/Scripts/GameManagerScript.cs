@@ -39,6 +39,25 @@ public class GameManagerScript : MonoBehaviour
     public Text upgrade3CostText;
     public Text upgrade3AmountText;
 
+
+    //LEVEL
+    public GameObject clickupgrade1Button;
+    public GameObject clickupgrade2Button;
+    public GameObject clickupgrade3Button;
+
+
+    public GameObject idleUpgradeButton;
+
+    public Text upgrade1LvlText;
+    public Text upgrade2LvlText;
+    public Text upgrade3LvlText;
+
+    public PlayerLevel playerLevel;
+
+    public Slider xpSlider ;
+
+    public Text playerLvlText;
+
    
     void Start()
     {
@@ -47,12 +66,30 @@ public class GameManagerScript : MonoBehaviour
         clickUpgradeButton3 = new IdleUpgradeButton(10, upgrade3CostText, 10, upgrade3AmountText, 1);
         idleUpgradeButton1 = new IdleUpgradeButton(10, idleUpgrade1CostText, 10, idleUpgrade1AmountText, 0.1f);
         idleUpgradeButton2 = new IdleUpgradeButton(10, idleUpgrade2CostText, 10, idleUpgrade2AmountText, 0.5f);
+
+        playerLevel = new PlayerLevel(xpSlider, playerLvlText);
+
+        clickupgrade2Button.SetActive(false);
+        clickupgrade3Button.SetActive(false);
+        idleUpgradeButton.SetActive(false);
     }
 
     void FixedUpdate()
     {
         updateUI();
         score += (idleAmount / 60);
+
+        playerLevel.XpSliderChanged();
+
+        if(clickUpgradeButton1.getUpgradeLvl() >= 10) {
+            clickupgrade2Button.SetActive(true);
+        }
+        if(clickUpgradeButton2.getUpgradeLvl() >= 10) {
+            clickupgrade3Button.SetActive(true);
+        }
+        if(playerLevel.GetPlayerLevel() >= 2){
+            idleUpgradeButton.SetActive(true);
+        }
     }
 
     private void updateUI()
@@ -61,18 +98,24 @@ public class GameManagerScript : MonoBehaviour
         clickAmountText.text = "Click Amount : " + clickAmount + " per click";
         idleAmountText.text = "Idle Amount : " + idleAmount.ToString("0.0") + " per second";
 
+        upgrade1LvlText.text = "Level : " + clickUpgradeButton1.getUpgradeLvl();
+        upgrade2LvlText.text = "Level : " + clickUpgradeButton2.getUpgradeLvl();
+        upgrade3LvlText.text = "Level : " + clickUpgradeButton3.getUpgradeLvl();
+
         clickUpgradeButton1.ButtonUiClick();
         clickUpgradeButton2.ButtonUiClick();
         clickUpgradeButton3.ButtonUiClick();
         idleUpgradeButton1.ButtonUiIdle();
         idleUpgradeButton2.ButtonUiIdle();
-
+        
+        playerLevel.UpdateUI();
     }
 
     public void onMainButtonPress()
     {
         score += clickAmount;
-        clickCounter += 1;
+        clickCounter++;
+        playerLevel.SetPlayerXp(clickAmount);
     }
 
     public void onUpgrade1ButtonPress()

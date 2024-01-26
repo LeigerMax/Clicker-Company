@@ -1,7 +1,7 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Represents a button for upgrading idle functionality in the game.
+/// This class is used to create an UpgradeButton object.
 /// </summary>
 public class IdleUpgradeButton 
 {
@@ -12,6 +12,8 @@ public class IdleUpgradeButton
 
     public Text idleUpgradeCostText;
     public Text idleUpgradeAmountText;
+
+    public int upgradeLvl = 0;
    
     public IdleUpgradeButton(int idleUpgradeCost, Text idleUpgradeCostText, int upgradeCostUnlock, Text idleUpgradeAmountText, float idleUpgradeAmount)
     {
@@ -34,6 +36,7 @@ public class IdleUpgradeButton
             score -= idleUpgradeCost;
             idleAmount += idleUpgradeAmount;
             this.idleUpgradeCost += 10;
+            this.upgradeLvl++;
         }
     }
 
@@ -49,6 +52,7 @@ public class IdleUpgradeButton
             score -= idleUpgradeCost;
             clickAmount += (int)idleUpgradeAmount;
             this.idleUpgradeCost += 10;
+            this.upgradeLvl++;
         }
     }
 
@@ -62,6 +66,11 @@ public class IdleUpgradeButton
     {
         this.idleUpgradeCostText.text = "Price : " + idleUpgradeCost + "$";
         this.idleUpgradeAmountText.text = "+ " + idleUpgradeAmount + " per click";
+    }
+
+    public int getUpgradeLvl()
+    {
+        return this.upgradeLvl;
     }
 }
 
