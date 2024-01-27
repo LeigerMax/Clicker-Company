@@ -757,7 +757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score : 012345'
+  m_Text: 'Money : 0.0$'
 --- !u!222 &523600899
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -785,6 +785,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 167}
   m_SizeDelta: {x: 308.57, y: 121.45}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &588003637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588003639}
+  - component: {fileID: 588003638}
+  m_Layer: 0
+  m_Name: Money
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &588003638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588003637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483dcf6edfbd7174ca079d550caaa424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  moneyText: {fileID: 523600898}
+--- !u!4 &588003639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588003637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19702855, y: -0.18504646, z: 956.8086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &683588665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,6 +1752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1134826946}
   - component: {fileID: 1134826947}
+  - component: {fileID: 1134826948}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1740,10 +1787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a10838e67bfc564abe89214e0632656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  scoreText: {fileID: 523600898}
   clickAmountText: {fileID: 1537760237}
   idleAmountText: {fileID: 785876861}
+  clickCounter: 0
   idleUpgrade2CostText: {fileID: 1023619699}
   idleUpgrade2AmountText: {fileID: 1337561295}
   idleUpgrade1CostText: {fileID: 486472312}
@@ -1761,9 +1807,20 @@ MonoBehaviour:
   upgrade1LvlText: {fileID: 2008984151}
   upgrade2LvlText: {fileID: 1109979252}
   upgrade3LvlText: {fileID: 794219311}
-  playerLevel: {fileID: 0}
-  xpSlider: {fileID: 756897596}
-  playerLvlText: {fileID: 1374614340}
+  playerLevel: {fileID: 37990159}
+  money: {fileID: 588003638}
+--- !u!114 &1134826948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134826944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2c61bec3f506e4592a56600b603cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1256650133
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,3 +3081,4 @@ SceneRoots:
   - {fileID: 2117562760}
   - {fileID: 1134826946}
   - {fileID: 37990158}
+  - {fileID: 588003639}
