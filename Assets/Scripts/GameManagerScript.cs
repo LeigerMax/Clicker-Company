@@ -50,6 +50,7 @@ public class GameManagerScript : MonoBehaviour
 
     [SerializeField] public PlayerLevel playerLevel;
     [SerializeField] public MoneyScript money;
+    private NumberConverter numberConverter = new NumberConverter();
     
 
 
@@ -88,27 +89,8 @@ public class GameManagerScript : MonoBehaviour
 
     private void updateUI()
     {
-
-        if(clickAmount < 1000) {
-            clickAmountText.text = "Click Amount : " + clickAmount + " per click";
-        }
-        if(clickAmount >= 1000 && clickAmount < 1000000000) {
-            clickAmountText.text = "Click Amount : " + (clickAmount / 1000).ToString("0.0") + "K per click";
-        }
-        if(clickAmount >= 1000000 && clickAmount < 1000000000000) {
-            clickAmountText.text = "Click Amount : " + (clickAmount / 1000000).ToString("0.0") + "M per click";
-        }
-
-        if(idleAmount < 1000) {
-            idleAmountText.text = "Idle Amount : " + idleAmount.ToString("0.0") + " per second";
-        }
-        if(idleAmount >= 1000 && idleAmount < 1000000000) {
-            idleAmountText.text = "Idle Amount : " + (idleAmount / 1000).ToString("0.0") + "K per second";
-        }
-        if(idleAmount >= 1000000 && idleAmount < 1000000000000) {
-            idleAmountText.text = "Idle Amount : " + (idleAmount / 1000000).ToString("0.0") + "M per second";
-        }
-
+        clickAmountText.text = "Click Amount :" + numberConverter.UpdateUI(clickAmount) +" per click";
+        idleAmountText.text = "Idle Amount :" + numberConverter.UpdateUI(idleAmount) + " per second";
 
         upgrade1LvlText.text = "Level : " + clickUpgradeButton1.getUpgradeLvl();
         upgrade2LvlText.text = "Level : " + clickUpgradeButton2.getUpgradeLvl();

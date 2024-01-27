@@ -37,7 +37,7 @@ public class MoneyScript : MonoBehaviour
 
     public void UpdateMoneyUI()
     {
-        moneyText.text = "Money :" + numberConverter.UpdateUI(money,"$");
+        moneyText.text = "Money :" + numberConverter.UpdateUI(money)+"$";
     }    
-    
+
 }
