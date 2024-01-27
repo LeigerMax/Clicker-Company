@@ -40,7 +40,7 @@ public class IdleUpgradeButton
         }
     }
 
-    public void OnClickUpgradeButtonPress(ref float score, ref int clickAmount)
+    public void OnClickUpgradeButtonPress(ref float score, ref float clickAmount)
     {
         if (!upgradeUnlocked && score >= upgradeCostUnlock) //TODO: Au lieu de payer avec le score, on va utiliser le nombre de clicks
         {
@@ -65,7 +65,20 @@ public class IdleUpgradeButton
 
     public void ButtonUiClick()
     {
-        this.idleUpgradeCostText.text = "Price : " + idleUpgradeCost + "$";
+        if(this.idleUpgradeCost < 1000)
+        {
+            this.idleUpgradeCostText.text = "Price : " + idleUpgradeCost + "$";
+        }
+        else if(this.idleUpgradeCost >= 1000 && this.idleUpgradeCost < 1000000)
+        {
+            this.idleUpgradeCostText.text = "Price : " + (idleUpgradeCost / 1000).ToString("0.0") + "K$";
+        }
+        else if(this.idleUpgradeCost >= 1000000 && this.idleUpgradeCost < 1000000000)
+        {
+            this.idleUpgradeCostText.text = "Price : " + (idleUpgradeCost / 1000000).ToString("0.0") + "M$";
+        }
+    
+        
         this.idleUpgradeAmountText.text = "+ " + idleUpgradeAmount + " per click";
     }
 
