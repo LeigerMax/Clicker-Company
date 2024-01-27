@@ -7,14 +7,10 @@ using UnityEngine.UI;
 public class GameManagerScript : MonoBehaviour
 {
 
-    public float score = 0;
-    public Text scoreText;
-
     public Text clickAmountText;
     public Text idleAmountText;
-
     
-    private int clickAmount = 1;
+    private float clickAmount = 100000;
     private int clickCounter = 0;
     private float idleAmount = 0.0f;
 
@@ -53,6 +49,8 @@ public class GameManagerScript : MonoBehaviour
     public Text upgrade3LvlText;
 
     [SerializeField] public PlayerLevel playerLevel;
+    [SerializeField] public MoneyScript money;
+    
 
 
     void Start()
@@ -67,12 +65,13 @@ public class GameManagerScript : MonoBehaviour
         clickupgrade2Button.SetActive(false);
         clickupgrade3Button.SetActive(false);
         idleUpgradeButton.SetActive(false);
+
     }
 
     void FixedUpdate()
     {
         updateUI();
-        score += (idleAmount / 60);
+        money.AddMoney((idleAmount / 60));
 
         playerLevel.UpdateXpSlider();
 
@@ -89,9 +88,27 @@ public class GameManagerScript : MonoBehaviour
 
     private void updateUI()
     {
-        scoreText.text = "Score : " + score.ToString("0.0");
-        clickAmountText.text = "Click Amount : " + clickAmount + " per click";
-        idleAmountText.text = "Idle Amount : " + idleAmount.ToString("0.0") + " per second";
+
+        if(clickAmount < 1000) {
+            clickAmountText.text = "Click Amount : " + clickAmount + " per click";
+        }
+        if(clickAmount >= 1000 && clickAmount < 1000000000) {
+            clickAmountText.text = "Click Amount : " + (clickAmount / 1000).ToString("0.0") + "K per click";
+        }
+        if(clickAmount >= 1000000 && clickAmount < 1000000000000) {
+            clickAmountText.text = "Click Amount : " + (clickAmount / 1000000).ToString("0.0") + "M per click";
+        }
+
+        if(idleAmount < 1000) {
+            idleAmountText.text = "Idle Amount : " + idleAmount.ToString("0.0") + " per second";
+        }
+        if(idleAmount >= 1000 && idleAmount < 1000000000) {
+            idleAmountText.text = "Idle Amount : " + (idleAmount / 1000).ToString("0.0") + "K per second";
+        }
+        if(idleAmount >= 1000000 && idleAmount < 1000000000000) {
+            idleAmountText.text = "Idle Amount : " + (idleAmount / 1000000).ToString("0.0") + "M per second";
+        }
+
 
         upgrade1LvlText.text = "Level : " + clickUpgradeButton1.getUpgradeLvl();
         upgrade2LvlText.text = "Level : " + clickUpgradeButton2.getUpgradeLvl();
@@ -104,37 +121,43 @@ public class GameManagerScript : MonoBehaviour
         idleUpgradeButton2.ButtonUiIdle();
         
        playerLevel.UpdatePlayerLevelUI();
+       money.UpdateMoneyUI();
     }
 
     public void onMainButtonPress()
     {
-        score += clickAmount;
+        money.AddMoney(clickAmount);
         clickCounter++;
         playerLevel.AddPlayerExperience(1);
     }
 
     public void onUpgrade1ButtonPress()
     {
-        clickUpgradeButton1.OnClickUpgradeButtonPress(ref score, ref clickAmount);
+        float getMoney =  money.Money;
+        clickUpgradeButton1.OnClickUpgradeButtonPress(ref getMoney, ref clickAmount);
     }
 
     public void onUpgrade2ButtonPress()
     {
-        clickUpgradeButton2.OnClickUpgradeButtonPress(ref score, ref clickAmount);
+        float getMoney =  money.Money;
+        clickUpgradeButton2.OnClickUpgradeButtonPress(ref getMoney, ref clickAmount);
     }
 
     public void onUpgrade3ButtonPress()
     {
-        clickUpgradeButton3.OnClickUpgradeButtonPress(ref score, ref clickAmount);
+        float getMoney =  money.Money;
+        clickUpgradeButton3.OnClickUpgradeButtonPress(ref getMoney, ref clickAmount);
     }
 
 
     public void onIdleUpgrade1ButtonPress() {
-        idleUpgradeButton1.OnIdleUpgradeButtonPress(ref score, ref idleAmount);
+        float getMoney =  money.Money;
+        idleUpgradeButton1.OnIdleUpgradeButtonPress(ref getMoney, ref idleAmount);
     }
 
     public void onIdleUpgrade2ButtonPress() {
-        idleUpgradeButton2.OnIdleUpgradeButtonPress(ref score, ref idleAmount);
+        float getMoney =  money.Money;
+        idleUpgradeButton2.OnIdleUpgradeButtonPress(ref getMoney, ref idleAmount);
     }
 
 
