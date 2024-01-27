@@ -110,7 +110,7 @@ public class GameManagerScript : MonoBehaviour
     {
         score += clickAmount;
         clickCounter++;
-        playerLevel.AddPlayerExperience(clickAmount);
+        playerLevel.AddPlayerExperience(1);
     }
 
     public void onUpgrade1ButtonPress()

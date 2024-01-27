@@ -1,12 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class to manage player's level and experience.
+/// </summary>
+/// <author> Maxou </author>
+/// <lastModified>27-01-2024</lastModified>
+    
 public class PlayerLevel : MonoBehaviour
 {
     [SerializeField] private float playerXp = 0;
     [SerializeField] private int playerLevel = 1;
     [SerializeField] private float playerNeededXp = 100;
-    private float experienceMultiplier = .10f;
+    private float experienceMultiplier = .50f;
 
     [SerializeField] private Slider xpSlider;
     [SerializeField] private Text playerLvlText;
@@ -49,7 +55,7 @@ public class PlayerLevel : MonoBehaviour
             playerLevel++;
             playerXp = 0;
             playerNeededXp += playerNeededXp * experienceMultiplier;
-            experienceMultiplier += 0.10f;
+            experienceMultiplier += 0.50f;
             UpdatePlayerLevelUI();
             UpdateXpSlider();
         }
