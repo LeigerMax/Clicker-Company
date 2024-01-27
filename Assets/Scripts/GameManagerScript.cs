@@ -10,28 +10,28 @@ public class GameManagerScript : MonoBehaviour
     public Text clickAmountText;
     public Text idleAmountText;
     
-    private float clickAmount = 100000;
+    private float clickAmount = 1;
     private int clickCounter = 0;
     private float idleAmount = 0.0f;
 
-    private IdleUpgradeButton idleUpgradeButton2;
+    private UgradeButton idleUpgradeButton2;
     public Text idleUpgrade2CostText;
     public Text idleUpgrade2AmountText;
 
 
-    private IdleUpgradeButton idleUpgradeButton1;
+    private UgradeButton idleUpgradeButton1;
     public Text idleUpgrade1CostText;
     public Text idleUpgrade1AmountText;
 
-    private IdleUpgradeButton clickUpgradeButton1;
+    private UgradeButton clickUpgradeButton1;
     public Text upgrade1CostText;
     public Text upgrade1AmountText;
 
-    private IdleUpgradeButton clickUpgradeButton2;
+    private UgradeButton clickUpgradeButton2;
     public Text upgrade2CostText;
     public Text upgrade2AmountText;
 
-    private IdleUpgradeButton clickUpgradeButton3;
+    private UgradeButton clickUpgradeButton3;
     public Text upgrade3CostText;
     public Text upgrade3AmountText;
 
@@ -53,14 +53,13 @@ public class GameManagerScript : MonoBehaviour
     private NumberConverter numberConverter = new NumberConverter();
     
 
-
     void Start()
     {
-        clickUpgradeButton1 = new IdleUpgradeButton(10, upgrade1CostText, 10, upgrade1AmountText, 1);
-        clickUpgradeButton2 = new IdleUpgradeButton(10, upgrade2CostText, 10, upgrade2AmountText, 1);
-        clickUpgradeButton3 = new IdleUpgradeButton(10, upgrade3CostText, 10, upgrade3AmountText, 1);
-        idleUpgradeButton1 = new IdleUpgradeButton(10, idleUpgrade1CostText, 10, idleUpgrade1AmountText, 0.1f);
-        idleUpgradeButton2 = new IdleUpgradeButton(10, idleUpgrade2CostText, 10, idleUpgrade2AmountText, 0.5f);
+        clickUpgradeButton1 = new UgradeButton(10, upgrade1CostText, 10, upgrade1AmountText, 1);
+        clickUpgradeButton2 = new UgradeButton(10, upgrade2CostText, 10, upgrade2AmountText, 1);
+        clickUpgradeButton3 = new UgradeButton(10, upgrade3CostText, 10, upgrade3AmountText, 1);
+        idleUpgradeButton1 = new UgradeButton(10, idleUpgrade1CostText, 10, idleUpgrade1AmountText, 0.1f);
+        idleUpgradeButton2 = new UgradeButton(10, idleUpgrade2CostText, 10, idleUpgrade2AmountText, 0.5f);
 
 
         clickupgrade2Button.SetActive(false);
@@ -76,10 +75,10 @@ public class GameManagerScript : MonoBehaviour
 
         playerLevel.UpdateXpSlider();
 
-        if(clickUpgradeButton1.getUpgradeLvl() >= 10) {
+        if(clickUpgradeButton1.UpgradeLvl >= 10) {
             clickupgrade2Button.SetActive(true);
         }
-        if(clickUpgradeButton2.getUpgradeLvl() >= 10) {
+        if(clickUpgradeButton2.UpgradeLvl >= 10) {
             clickupgrade3Button.SetActive(true);
         }
         if(playerLevel.PlayerLevelValue >= 2){
@@ -92,9 +91,9 @@ public class GameManagerScript : MonoBehaviour
         clickAmountText.text = "Click Amount :" + numberConverter.UpdateUI(clickAmount) +" per click";
         idleAmountText.text = "Idle Amount :" + numberConverter.UpdateUI(idleAmount) + " per second";
 
-        upgrade1LvlText.text = "Level : " + clickUpgradeButton1.getUpgradeLvl();
-        upgrade2LvlText.text = "Level : " + clickUpgradeButton2.getUpgradeLvl();
-        upgrade3LvlText.text = "Level : " + clickUpgradeButton3.getUpgradeLvl();
+        upgrade1LvlText.text = "Level : " + clickUpgradeButton1.UpgradeLvl;
+        upgrade2LvlText.text = "Level : " + clickUpgradeButton2.UpgradeLvl;
+        upgrade3LvlText.text = "Level : " + clickUpgradeButton3.UpgradeLvl;
 
         clickUpgradeButton1.ButtonUiClick();
         clickUpgradeButton2.ButtonUiClick();

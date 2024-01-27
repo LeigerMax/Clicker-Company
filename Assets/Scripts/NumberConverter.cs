@@ -6,7 +6,7 @@ using System;
 /// </summary>
 /// <author> Maxou </author>
 /// <lastModified>27-01-2024</lastModified>
-/// 
+
 public class NumberConverter 
 {
 
