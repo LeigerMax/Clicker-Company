@@ -3,63 +3,56 @@ using UnityEngine.UI;
 
 public class PlayerLevel : MonoBehaviour
 {
-    public float playerXp = 0;
-    public int playerLevel = 1;
-    public float playerNeededXp = 100;
+    [SerializeField] private float playerXp = 0;
+    [SerializeField] private int playerLevel = 1;
+    [SerializeField] private float playerNeededXp = 100;
+    private float experienceMultiplier = .10f;
 
-    public Slider xpSlider ;
+    [SerializeField] private Slider xpSlider;
+    [SerializeField] private Text playerLvlText;
 
-    public Text playerLvlText;
 
-    public PlayerLevel(Slider xpSlider, Text playerLvlText){
-        this.xpSlider = xpSlider;
-        this.playerLvlText = playerLvlText;
+    public int PlayerLevelValue
+    {
+        get { return playerLevel; }
+        set { playerLevel = value; }
+    }
+
+    public float PlayerNeededXp
+    {
+        get { return playerNeededXp; }
     }
 
 
-    public void SetPlayerXp(int xp)
+    public void AddPlayerExperience(int xp)
     {
-        if (this.xpSlider != null)
-        {
-            this.playerXp += xp;
-            this.xpSlider.value = playerXp;
-        }
-        LevelUp();
+        playerXp += xp;
+        xpSlider.value = playerXp;
+        CheckForLevelUp();
     }
 
-    public void UpdateUI()
+    public void UpdatePlayerLevelUI()
     {
-        if (this.playerLvlText != null)
-        {
-            this.playerLvlText.text = "Player Level : " + this.playerLevel;
-        }
+        playerLvlText.text = $"Player Level : {playerLevel}";
     }    
 
-    public void XpSliderChanged()
+    public void UpdateXpSlider()
     {
-        if (this.xpSlider != null)
-        {
-            this.xpSlider.value = this.playerXp;
-            this.xpSlider.maxValue = this.playerNeededXp;
-        }
+        xpSlider.value = playerXp;
+        xpSlider.maxValue = playerNeededXp;
     }
 
-    public int GetPlayerLevel()
-    {
-        return this.playerLevel;
-    }
-
-    private void LevelUp()
+    public void CheckForLevelUp()
     {
         if (playerXp >= playerNeededXp)
         {
             playerLevel++;
             playerXp = 0;
-            playerNeededXp += playerNeededXp * .10f;
-            UpdateUI();
-            XpSliderChanged();
+            playerNeededXp += playerNeededXp * experienceMultiplier;
+            experienceMultiplier += 0.10f;
+            UpdatePlayerLevelUI();
+            UpdateXpSlider();
         }
     }
-
     
 }

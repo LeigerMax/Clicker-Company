@@ -52,13 +52,9 @@ public class GameManagerScript : MonoBehaviour
     public Text upgrade2LvlText;
     public Text upgrade3LvlText;
 
-    public PlayerLevel playerLevel;
+    [SerializeField] public PlayerLevel playerLevel;
 
-    public Slider xpSlider ;
 
-    public Text playerLvlText;
-
-   
     void Start()
     {
         clickUpgradeButton1 = new IdleUpgradeButton(10, upgrade1CostText, 10, upgrade1AmountText, 1);
@@ -67,7 +63,6 @@ public class GameManagerScript : MonoBehaviour
         idleUpgradeButton1 = new IdleUpgradeButton(10, idleUpgrade1CostText, 10, idleUpgrade1AmountText, 0.1f);
         idleUpgradeButton2 = new IdleUpgradeButton(10, idleUpgrade2CostText, 10, idleUpgrade2AmountText, 0.5f);
 
-        playerLevel = new PlayerLevel(xpSlider, playerLvlText);
 
         clickupgrade2Button.SetActive(false);
         clickupgrade3Button.SetActive(false);
@@ -79,7 +74,7 @@ public class GameManagerScript : MonoBehaviour
         updateUI();
         score += (idleAmount / 60);
 
-        playerLevel.XpSliderChanged();
+        playerLevel.UpdateXpSlider();
 
         if(clickUpgradeButton1.getUpgradeLvl() >= 10) {
             clickupgrade2Button.SetActive(true);
@@ -87,7 +82,7 @@ public class GameManagerScript : MonoBehaviour
         if(clickUpgradeButton2.getUpgradeLvl() >= 10) {
             clickupgrade3Button.SetActive(true);
         }
-        if(playerLevel.GetPlayerLevel() >= 2){
+        if(playerLevel.PlayerLevelValue >= 2){
             idleUpgradeButton.SetActive(true);
         }
     }
@@ -108,14 +103,14 @@ public class GameManagerScript : MonoBehaviour
         idleUpgradeButton1.ButtonUiIdle();
         idleUpgradeButton2.ButtonUiIdle();
         
-        playerLevel.UpdateUI();
+       playerLevel.UpdatePlayerLevelUI();
     }
 
     public void onMainButtonPress()
     {
         score += clickAmount;
         clickCounter++;
-        playerLevel.SetPlayerXp(clickAmount);
+        playerLevel.AddPlayerExperience(clickAmount);
     }
 
     public void onUpgrade1ButtonPress()

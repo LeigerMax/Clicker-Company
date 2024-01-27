@@ -1761,7 +1761,9 @@ MonoBehaviour:
   upgrade1LvlText: {fileID: 2008984151}
   upgrade2LvlText: {fileID: 1109979252}
   upgrade3LvlText: {fileID: 794219311}
-  playerLevel: {fileID: 37990159}
+  playerLevel: {fileID: 0}
+  xpSlider: {fileID: 756897596}
+  playerLvlText: {fileID: 1374614340}
 --- !u!1 &1256650133
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class IdleUpgradeButton
     public Text idleUpgradeAmountText;
 
     public int upgradeLvl = 0;
-   
+
     public IdleUpgradeButton(int idleUpgradeCost, Text idleUpgradeCostText, int upgradeCostUnlock, Text idleUpgradeAmountText, float idleUpgradeAmount)
     {
         this.idleUpgradeCost = idleUpgradeCost;
@@ -55,6 +55,7 @@ public class IdleUpgradeButton
             this.upgradeLvl++;
         }
     }
+
 
     public void ButtonUiIdle()
     {
