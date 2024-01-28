@@ -17,12 +17,7 @@ public class IdleAmountScript : MonoBehaviour
     public float IdleAmount
     {
         get { return amount; }
-        set { amount = value; }
+        set { amount += value; }
     }
-
-    public void AddAmount(float getIdleAmount){
-        amount += getIdleAmount;
-    }
-  
 
 }
