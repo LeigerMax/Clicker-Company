@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerXp: 0
-  playerLevel: 1
+  playerLevelValue: 1
   playerNeededXp: 100
   xpSlider: {fileID: 756897596}
   playerLvlText: {fileID: 1374614340}
