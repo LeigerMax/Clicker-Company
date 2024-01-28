@@ -91,8 +91,8 @@ public class GameManagerScript : MonoBehaviour
 
     private void updateUI()
     {
-        clickAmountText.text = "Click Amount :" + numberConverter.UpdateUI(clickAmount) +" per click";
-        idleAmountText.text = "Idle Amount :" + numberConverter.UpdateUI(idleAmountScript.IdleAmount) + " per second";
+        clickAmountText.text = "Click :" + numberConverter.UpdateUI(clickAmount) +" per click";
+        idleAmountText.text = "Idle :" + numberConverter.UpdateUI(idleAmountScript.IdleAmount) + " per second";
 
         upgrade1LvlText.text = "Level : " + clickUpgradeButton1.UpgradeLvl;
         upgrade2LvlText.text = "Level : " + clickUpgradeButton2.UpgradeLvl;

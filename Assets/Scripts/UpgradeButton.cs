@@ -12,6 +12,7 @@ public class UgradeButton
     public int upgradeCostUnlock;
     public bool upgradeUnlocked = false;
     public float upgradeAmount;
+    public int maxUpgradeLevel = 100;
 
     public Text upgradeCostText;
     public Text upgradeAmountText;
@@ -41,7 +42,7 @@ public class UgradeButton
             money -= upgradeCostUnlock;
             this.upgradeUnlocked = true;
         }
-        else if (money >= upgradeCost)
+        else if (money >= upgradeCost && upgradeLvl < maxUpgradeLevel)
         {
             money -= upgradeCost;
             idleAmount += upgradeAmount;
@@ -57,7 +58,7 @@ public class UgradeButton
             money -= upgradeCostUnlock;
             this.upgradeUnlocked = true;
         }
-        else if (money >= upgradeCost)
+        else if (money >= upgradeCost && upgradeLvl < maxUpgradeLevel)
         {
             money -= upgradeCost;
             clickAmount += (int)upgradeAmount;
