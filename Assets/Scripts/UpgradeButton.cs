@@ -11,7 +11,7 @@ public class UgradeButton
     public int upgradeCost;
     public int upgradeCostUnlock;
     public bool upgradeUnlocked = false;
-    private readonly float upgradeAmount;
+    public float upgradeAmount;
 
     public Text upgradeCostText;
     public Text upgradeAmountText;
@@ -34,32 +34,32 @@ public class UgradeButton
         this.upgradeAmount = upgradeAmount;
     }
 
-    public void OnIdleUpgradeButtonPress(ref float score, ref float idleAmount)
+    public void OnIdleUpgradeButtonPress(ref float money, ref float idleAmount)
     {
-        if (!upgradeUnlocked && score >= upgradeCostUnlock) //TODO: Au lieu de payer avec le score, on va utiliser le nombre de clicks
+        if (!upgradeUnlocked && money >= upgradeCostUnlock) 
         {
-            score -= upgradeCostUnlock;
+            money -= upgradeCostUnlock;
             this.upgradeUnlocked = true;
         }
-        else if (score >= upgradeCost)
+        else if (money >= upgradeCost)
         {
-            score -= upgradeCost;
+            money -= upgradeCost;
             idleAmount += upgradeAmount;
             this.upgradeCost += 10;
             this.upgradeLvl++;
         }
     }
 
-    public void OnClickUpgradeButtonPress(ref float score, ref float clickAmount)
+    public void OnClickUpgradeButtonPress(ref float money, ref float clickAmount)
     {
-        if (!upgradeUnlocked && score >= upgradeCostUnlock) //TODO: Au lieu de payer avec le score, on va utiliser le nombre de clicks
+        if (!upgradeUnlocked && money >= upgradeCostUnlock) 
         {
-            score -= upgradeCostUnlock;
+            money -= upgradeCostUnlock;
             this.upgradeUnlocked = true;
         }
-        else if (score >= upgradeCost)
+        else if (money >= upgradeCost)
         {
-            score -= upgradeCost;
+            money -= upgradeCost;
             clickAmount += (int)upgradeAmount;
             this.upgradeCost += 10;
             this.upgradeLvl++;

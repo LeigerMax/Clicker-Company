@@ -12,7 +12,6 @@ public class GameManagerScript : MonoBehaviour
     
     private float clickAmount = 1;
     public int clickCounter = 0;
-    private float idleAmount = 0.0f;
 
     private UgradeButton idleUpgradeButton2;
     public Text idleUpgrade2CostText;
@@ -50,6 +49,8 @@ public class GameManagerScript : MonoBehaviour
 
     [SerializeField] public PlayerLevel playerLevel;
     [SerializeField] public MoneyScript money;
+    [SerializeField] public IdleAmountScript idleAmountScript;
+
     private NumberConverter numberConverter = new NumberConverter();
     
 
@@ -71,7 +72,7 @@ public class GameManagerScript : MonoBehaviour
     void FixedUpdate()
     {
         updateUI();
-        money.AddMoney((idleAmount / 60));
+        money.AddMoney((idleAmountScript.IdleAmount / 60));
 
         playerLevel.UpdateXpSlider();
 
@@ -84,12 +85,14 @@ public class GameManagerScript : MonoBehaviour
         if(playerLevel.PlayerLevelValue >= 2){
             idleUpgradeButton.SetActive(true);
         }
+
+        GetComponent<SaveLoad>().SaveProfile();
     }
 
     private void updateUI()
     {
         clickAmountText.text = "Click Amount :" + numberConverter.UpdateUI(clickAmount) +" per click";
-        idleAmountText.text = "Idle Amount :" + numberConverter.UpdateUI(idleAmount) + " per second";
+        idleAmountText.text = "Idle Amount :" + numberConverter.UpdateUI(idleAmountScript.IdleAmount) + " per second";
 
         upgrade1LvlText.text = "Level : " + clickUpgradeButton1.UpgradeLvl;
         upgrade2LvlText.text = "Level : " + clickUpgradeButton2.UpgradeLvl;
@@ -110,7 +113,6 @@ public class GameManagerScript : MonoBehaviour
         money.AddMoney(clickAmount);
         clickCounter++;
         playerLevel.AddPlayerExperience(1);
-        GetComponent<SaveLoad>().SaveProfile();
     }
 
     public void onUpgrade1ButtonPress()
@@ -134,12 +136,16 @@ public class GameManagerScript : MonoBehaviour
 
     public void onIdleUpgrade1ButtonPress() {
         float getMoney =  money.Money;
-        idleUpgradeButton1.OnIdleUpgradeButtonPress(ref getMoney, ref idleAmount);
+        float getIdleAmount = idleAmountScript.IdleAmount;
+        idleUpgradeButton1.OnIdleUpgradeButtonPress(ref getMoney, ref getIdleAmount);
+        idleAmountScript.IdleAmount = getIdleAmount;
     }
 
     public void onIdleUpgrade2ButtonPress() {
         float getMoney =  money.Money;
-        idleUpgradeButton2.OnIdleUpgradeButtonPress(ref getMoney, ref idleAmount);
+        float getIdleAmount = idleAmountScript.IdleAmount;
+        idleUpgradeButton2.OnIdleUpgradeButtonPress(ref getMoney, ref getIdleAmount);
+        idleAmountScript.IdleAmount = getIdleAmount;
     }
 
 

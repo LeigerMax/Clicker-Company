@@ -6,17 +6,20 @@ using UnityEngine;
 ///  This class contains the save and load methods.
 /// </summary>
 /// <author> Maxou </author>
-/// <lastModified>27-01-2024</lastModified>
+/// <lastModified>28-01-2024</lastModified>
 
 public class SaveLoad : MonoBehaviour
 {
 
     private PlayerLevel playerLevel;
 
-    void Start()
+    void Awake()
     {
         // MoneyScript
         GetComponent<GameManagerScript>().money.Money = PlayerPrefs.GetFloat("Money",0);
+
+        // IdleAmountScript
+        GetComponent<GameManagerScript>().idleAmountScript.IdleAmount = PlayerPrefs.GetFloat("IdleAmount",.0f);
 
 
         // PlayerLevels
@@ -36,6 +39,9 @@ public class SaveLoad : MonoBehaviour
         // MoneyScript
         PlayerPrefs.SetFloat("Money",  GetComponent<GameManagerScript>().money.Money);
 
+        // IdleAmountScript
+        PlayerPrefs.SetFloat("IdleAmount",  GetComponent<GameManagerScript>().idleAmountScript.IdleAmount);
+
 
         // PlayerLevel
         PlayerPrefs.SetFloat("PlayerXp",  GetComponent<GameManagerScript>().playerLevel.PlayerXp);
@@ -46,8 +52,7 @@ public class SaveLoad : MonoBehaviour
 
         // GameManagerScript
         PlayerPrefs.SetInt("ClickCount", GetComponent<GameManagerScript>().clickCounter);
-       
-       
+
     }
 
 
