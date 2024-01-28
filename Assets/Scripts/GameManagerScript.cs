@@ -11,7 +11,7 @@ public class GameManagerScript : MonoBehaviour
     public Text idleAmountText;
     
     private float clickAmount = 1;
-    private int clickCounter = 0;
+    public int clickCounter = 0;
     private float idleAmount = 0.0f;
 
     private UgradeButton idleUpgradeButton2;
@@ -110,6 +110,7 @@ public class GameManagerScript : MonoBehaviour
         money.AddMoney(clickAmount);
         clickCounter++;
         playerLevel.AddPlayerExperience(1);
+        GetComponent<SaveLoad>().SaveProfile();
     }
 
     public void onUpgrade1ButtonPress()
