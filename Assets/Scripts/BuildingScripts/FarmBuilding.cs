@@ -10,19 +10,17 @@ using UnityEngine;
 
 public class FarmBuilding : BuildingScript
 {
+    private string nameResource = "Wheat";
 
     protected void Start()
     {
         base.Start();
-        ProduceResource("Wheat",0);
     }
 
     public override void OnButtonClick()
     {
         base.OnButtonClick();
-        ProduceResource("Wheat",1);
-        resourceManager.DisplayResources(); 
-
-    
+        ProduceResource(nameResource,1);
+        resourceManager.DisplayResource(nameResource); 
     }
 }

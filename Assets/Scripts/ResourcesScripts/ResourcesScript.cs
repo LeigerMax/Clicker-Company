@@ -5,7 +5,7 @@
 /// <author> Maxou </author>
 /// <lastModified>29-01-2024</lastModified>
 
-public class RessourcesScript
+public class ResourcesScript
 {
     private string resourceName;
     private float quantity;
@@ -22,9 +22,9 @@ public class RessourcesScript
         set { this.resourceName = value; }
     }
 
-    public RessourcesScript(string resourceName, float quantity)
+    public ResourcesScript(string ressourceName, float quantity)
     {
-        this.resourceName = resourceName;
+        this.resourceName = ressourceName;
         this.quantity = quantity;
     }
 

@@ -9,19 +9,19 @@ using UnityEngine;
 public class CityHallBuildingScript : BuildingScript
 {
     public new GameObject level3Building;
+    private string nameResource = "Gold";
 
     protected void Start()
     {
         base.Start();
         level3Building?.SetActive(false);
-        ProduceResource("Gold",0);
     }
 
     public override void OnButtonClick()
     {
         base.OnButtonClick();
-        ProduceResource("Gold",1);
-        resourceManager.DisplayResources(); 
+        ProduceResource(nameResource,1);
+        resourceManager.DisplayResource(nameResource); 
 
         if (clickCounter >= 2560)
         {

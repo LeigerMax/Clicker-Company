@@ -55,20 +55,12 @@ public class BuildingScript : MonoBehaviour
 
     }
 
-    public void ProduceResource(string nameResource, float quantity)
+    public void ProduceResource(string nameRessource, float quantity)
     {
-        RessourcesScript existingResource = resourceManager.GetResourceByName(nameResource);
-        nameResourceProduct = nameResource;
+        ResourcesScript ressource = resourceManager.GetResourceByName(nameRessource);
+        nameResourceProduct = nameRessource;
+        ressource.AddQuantity(quantity);
 
-        if (existingResource != null)
-        {
-            existingResource.AddQuantity(quantity);
-        }
-        else
-        {
-            RessourcesScript newResource = new RessourcesScript(nameResource, quantity);
-            resourceManager.AddResource(newResource, quantity);
-        }
     }
 
 
