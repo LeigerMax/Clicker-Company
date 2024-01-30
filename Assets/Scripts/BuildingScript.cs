@@ -8,6 +8,17 @@ public class BuildingScript : MonoBehaviour
     protected int clickCounter = 0;
 
     protected ResourceManager resourceManager;
+    public BuildingCalculatorScript buildingCalculator;
+
+    private string nameResourceProduct = null;
+
+
+    private float production = 1;
+    private int level = 1;
+    private float upgradeCost = 5;
+    private float multiplier = 2f;
+    private int prestige = 0;
+    private float prestigeMultiplierInterne = 1.0f;
 
     protected void Start()
     {
@@ -21,20 +32,33 @@ public class BuildingScript : MonoBehaviour
         }
     }
 
+    private void Update(){
+
+    }
+
     public virtual void OnButtonClick()
     {
         clickCounter++;
 
-        if (clickCounter >= 10)
+        if (clickCounter >= 5)
         {
             notBuilding.SetActive(false);
             level1Building.SetActive(true);
         }
+
+        
+        float quantityRessource = resourceManager.GetResourceQuantityByName(nameResourceProduct);
+        if(buildingCalculator.NewLevel(upgradeCost, quantityRessource)) {
+            level++;
+            (production, level, upgradeCost, multiplier) = buildingCalculator.CalculateBuildingStats(production, level, upgradeCost, multiplier);
+        }
+
     }
 
     public void ProduceResource(string nameResource, float quantity)
     {
         RessourcesScript existingResource = resourceManager.GetResourceByName(nameResource);
+        nameResourceProduct = nameResource;
 
         if (existingResource != null)
         {
@@ -46,4 +70,9 @@ public class BuildingScript : MonoBehaviour
             resourceManager.AddResource(newResource, quantity);
         }
     }
+
+
+    //Check si nouveau prestige
+    //buildingCalculator.NewPrestige(float prestigeMultiplier)
+
 }

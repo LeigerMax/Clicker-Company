@@ -39,4 +39,16 @@ public class ResourceManager : MonoBehaviour
         return null;
     }
 
+    public float GetResourceQuantityByName(string resourceName)
+    {
+        foreach (var resource in resources)
+        {
+            if (resource.ResourceName == resourceName)
+            {
+                return resource.Quantity;
+            }
+        }
+        return 0f;
+    }
+
 }

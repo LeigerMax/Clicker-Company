@@ -1001,6 +1001,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &924539701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 924539703}
+  - component: {fileID: 924539702}
+  m_Layer: 0
+  m_Name: BuildingCalculator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &924539702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924539701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8b6dbe20bd5914fb0f97081dd5fb21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &924539703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924539701}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -106.95937, y: 244.56145, z: -3.8025048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &931450772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notBuilding: {fileID: 1252464422}
   level1Building: {fileID: 855499105}
+  buildingCalculator: {fileID: 924539702}
   level3Building: {fileID: 390429268}
 --- !u!4 &1004776626
 Transform:
@@ -1977,6 +2022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notBuilding: {fileID: 899887071}
   level1Building: {fileID: 809780830}
+  buildingCalculator: {fileID: 924539702}
 --- !u!4 &1783454467
 Transform:
   m_ObjectHideFlags: 0
@@ -2285,3 +2331,4 @@ SceneRoots:
   - {fileID: 940113815}
   - {fileID: 1360311487}
   - {fileID: 1976671801}
+  - {fileID: 924539703}
