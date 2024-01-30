@@ -9,7 +9,12 @@ public class CameraScript : MonoBehaviour
 
     private Vector3 dragOrigin;
 
-    //[SerializeField] private float zoomStep, MinCamSize, MaxCamSize;
+    [SerializeField] private float zoom;
+    [SerializeField] private float zoomMultiplier =40f;
+    [SerializeField] private float minZoom = 50f;
+    [SerializeField] private float maxZoom = 400f;
+    [SerializeField] private float veloCity = 100f;
+    [SerializeField] private float smoothTime = 0.25f;
 
 
     [SerializeField] private SpriteRenderer mapRenderer;
@@ -24,10 +29,18 @@ public class CameraScript : MonoBehaviour
         mapMinY = mapRenderer.transform.position.y - mapRenderer.bounds.size.y / 2f;
         mapMaxY = mapRenderer.transform.position.y + mapRenderer.bounds.size.y / 2f;
 
+
+        zoom = camera.orthographicSize;
+
     }
 
     private void Update() {
         PanCamera();
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        zoom -= scroll * zoomMultiplier;
+        zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
+        camera.orthographicSize = Mathf.SmoothDamp(camera.orthographicSize, zoom, ref veloCity, smoothTime);
         
     }
 
@@ -62,18 +75,7 @@ public class CameraScript : MonoBehaviour
     }
 
     
-    /*
-    public void ZoomIn() {
-        float newSize = camera.orthographicSize - zoomStep;
-        camera.orthographicSize = Mathf.Clamp(newSize, MinCamSize, MaxCamSize);
-    }
 
-    public void ZoomOut() {
-        float newSize = camera.orthographicSize + zoomStep;
-        camera.orthographicSize = Mathf.Clamp(newSize, MinCamSize, MaxCamSize);
-
-        camera.transform.position = ClampCamera(camera.transform.position);
-    }*/
 
 
 }

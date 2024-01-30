@@ -17,8 +17,8 @@ public class BuildingScript : MonoBehaviour
     private int level = 1;
     private float upgradeCost = 5;
     private float multiplier = 2f;
-    private int prestige = 0;
-    private float prestigeMultiplierInterne = 1.0f;
+    //private int prestige = 0;
+    //private float prestigeMultiplierInterne = 1.0f;
 
     protected void Start()
     {
