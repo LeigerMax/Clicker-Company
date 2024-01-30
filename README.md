@@ -1,2 +1,2 @@
-# Clicker-Company
-Clicker Game 
+# Clicker-MedCity
+Clicker MedCity is a city management and idle game set in a medieval village. Players are tasked with developing their village by clicking on various buildings to collect resources. These resources can be used to upgrade existing buildings using upgrade buttons, or to build new buildings. A strategic element of the game is to strengthen the village's defences by building ramparts and recruiting soldiers, as the village faces attacks every night. In this way, players must balance economic expansion with military preparation to ensure the prosperity and security of their medieval village.
