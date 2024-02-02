@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManagerScript : MonoBehaviour
+public class GameManagerScript2 : MonoBehaviour
 {
 
     public Text clickAmountText;

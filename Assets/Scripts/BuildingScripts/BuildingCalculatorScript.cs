@@ -46,28 +46,25 @@ public class BuildingCalculatorScript : MonoBehaviour
         }
 
         if(lastDigit == 1) {
-            multiplier = 2;
+            multiplier = 2f;
         }
         else{
-            multiplier = multiplier - 0.1f;
+            multiplier -= 0.1f;
         }
 
-        upgradeCost = upgradeCost*2;
-        production = ((production*multiplier)+bonus)*prestigeMultiplierInterne;
+        upgradeCost *= 2f;
+        production = ((production * multiplier) + bonus)  * prestigeMultiplierInterne;
         
         Debug.Log($"Level: {level}, Production: {production}, Upgrade Cost: {upgradeCost}, Multiplier: {multiplier}");
         return (production, level, upgradeCost, multiplier);
     }
     
     public float NewPrestige(float prestigeMultiplier){
-        prestigeMultiplierInterne = prestigeMultiplier*1.001f;
+        prestigeMultiplierInterne = prestigeMultiplier * 1.001f;
         return prestigeMultiplierInterne;    
     }
 
     public bool NewLevel(float upgradeCost, float quantityRessource){
-        if(quantityRessource >= upgradeCost) {
-            return true;
-        }
-        return false;
+        return quantityRessource >= upgradeCost;
     }
 }

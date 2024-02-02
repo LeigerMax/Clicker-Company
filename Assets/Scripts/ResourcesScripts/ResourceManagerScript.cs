@@ -7,24 +7,24 @@ using UnityEngine;
 /// This class is used to store ressources in list. 
 /// </summary>
 /// <author> Maxou </author>
-/// <lastModified>29-01-2024</lastModified>
+/// <lastModified>02-02-2024</lastModified>
 
 public class ResourceManager : MonoBehaviour
 {
     private List<ResourcesScript> resources = new List<ResourcesScript>();
+    private readonly NumberConverter numberConverter = new NumberConverter();
 
-    public void Start()
+    public void InitResource()
     {
-        //InitRessource();
-    }
-
-    public void InitResource(){
-        resources.Add(new ResourcesScript("Gold", 0));
-        resources.Add(new ResourcesScript("Wheat",0));
-        resources.Add(new ResourcesScript("Wood", 0));
-        resources.Add(new ResourcesScript("Stone", 0));
-        resources.Add(new ResourcesScript("Iron", 0));
-        resources.Add(new ResourcesScript("Diamond", 0));
+        resources.AddRange(new[]
+            {
+                new ResourcesScript("Gold", 0),
+                new ResourcesScript("Wheat", 0),
+                new ResourcesScript("Wood", 0),
+                new ResourcesScript("Stone", 0),
+                new ResourcesScript("Iron", 0),
+                new ResourcesScript("Diamond", 0)
+            });
     }
 
     public void AddResource(ResourcesScript resource, float amount)
@@ -35,40 +35,26 @@ public class ResourceManager : MonoBehaviour
 
     public ResourcesScript GetResourceByName(string resourceName)
     {
-        foreach (var resource in resources)
-        {
-            if (resource.ResourceName == resourceName)
-            {
-                return resource;
-            }
-        }
-        return null;
+        return resources.FirstOrDefault(resource => resource.ResourceName == resourceName);
     }
 
     public float GetResourceQuantityByName(string resourceName)
     {
-        foreach (var resource in resources)
-        {
-            if (resource.ResourceName == resourceName)
-            {
-                return resource.Quantity;
-            }
-        }
-        return 0f;
+        return GetResourceByName(resourceName)?.Quantity ?? 0f;
     }
 
     public void DisplayResources()
     {
         foreach (var resource in resources)
         {
-            Debug.Log($"Resource: {resource.ResourceName}, Quantity: {resource.Quantity}");
+            Debug.Log($"Resource: {resource.ResourceName}, Quantity: {numberConverter.UpdateUI(resource.Quantity)}");
         }
     }
 
 
-    public void DisplayResource(string resourceName)
+    public void DisplayResourceLog(string resourceName)
     {
-        var resource = resources.FirstOrDefault(r => r.ResourceName == resourceName);
+        var resource = GetResourceByName(resourceName);
 
         if (resource != null)
         {
@@ -77,6 +63,20 @@ public class ResourceManager : MonoBehaviour
         else
         {
             Debug.Log($"Resource: {resourceName} not found.");
+        }
+    }
+
+    public string DisplayResource(string resourceName)
+    {
+        var resource = GetResourceByName(resourceName);
+
+        if (resource != null)
+        {
+            return $"{resource.ResourceName} : {numberConverter.UpdateUI(resource.Quantity)}";
+        }
+        else
+        {
+            return $"{resourceName} : 0";
         }
     }
 

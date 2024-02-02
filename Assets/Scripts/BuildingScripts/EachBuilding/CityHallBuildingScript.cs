@@ -4,31 +4,35 @@ using UnityEngine;
 /// This class is used to manage the CityHallBuilding.
 /// </summary>
 /// <author> Maxou </author>
-/// <lastModified>30-01-2024</lastModified>
+/// <lastModified>02-02-2024</lastModified>
 
 public class CityHallBuildingScript : BuildingScript
 {
-    public new GameObject level3Building;
-    private string nameResource = "Gold";
+    [SerializeField] private GameObject level3Building;
+
+    private readonly string nameResource = "Gold";
+    private readonly string buildingType = "CityHall";
+
+    private BuildingMenuUI buildingMenu;
 
     protected void Start()
     {
         base.Start();
         level3Building?.SetActive(false);
+        buildingMenu = GameManagerScript.Instance.GetBuildingMenu();
     }
 
     public override void OnButtonClick()
     {
         base.OnButtonClick();
-        ProduceResource(nameResource,1);
-        resourceManager.DisplayResource(nameResource); 
 
-        if (clickCounter >= 2560)
+        buildingMenu.ShowMenu(buildingType);
+
+        ProduceResource(nameResource);
+
+        if (clickCounter >= 2560  && level3Building != null)
         {
-            if (level3Building != null)
-            {
-                level3Building.SetActive(true);
-            }
+            level3Building.SetActive(true);
         }
     }
 

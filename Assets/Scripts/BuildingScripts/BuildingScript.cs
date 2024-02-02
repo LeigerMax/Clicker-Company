@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BuildingScript : MonoBehaviour
 {
-    public GameObject notBuilding;
-    public GameObject level1Building;
+    [SerializeField] private GameObject notBuilding = null;
+    [SerializeField] private GameObject level1Building = null;
 
     protected int clickCounter = 0;
 
@@ -20,25 +20,18 @@ public class BuildingScript : MonoBehaviour
     //private int prestige = 0;
     //private float prestigeMultiplierInterne = 1.0f;
 
+
     protected void Start()
     {
-
         level1Building.SetActive(false);
-
         resourceManager = FindObjectOfType<ResourceManager>();
-        if (resourceManager == null)
-        {
-            Debug.LogError("BuildingScript requires referencing to ResourceManager.");
-        }
     }
 
-    private void Update(){
-
-    }
 
     public virtual void OnButtonClick()
     {
-        clickCounter++;
+        clickCounter += (int)production;
+        Debug.Log($"production: {production}");
 
         if (clickCounter >= 5)
         {
@@ -46,7 +39,6 @@ public class BuildingScript : MonoBehaviour
             level1Building.SetActive(true);
         }
 
-        
         float quantityRessource = resourceManager.GetResourceQuantityByName(nameResourceProduct);
         if(buildingCalculator.NewLevel(upgradeCost, quantityRessource)) {
             level++;
@@ -55,16 +47,16 @@ public class BuildingScript : MonoBehaviour
 
     }
 
-    public void ProduceResource(string nameRessource, float quantity)
+    public void ProduceResource(string nameRessource)
     {
         ResourcesScript ressource = resourceManager.GetResourceByName(nameRessource);
         nameResourceProduct = nameRessource;
-        ressource.AddQuantity(quantity);
+        ressource.AddQuantity(production);
 
     }
 
 
-    //Check si nouveau prestige
+    //TODO : Check si nouveau prestige
     //buildingCalculator.NewPrestige(float prestigeMultiplier)
 
 }

@@ -6,21 +6,27 @@ using UnityEngine;
 /// This class is used to manage the FarmBuilding.
 /// </summary>
 /// <author> Maxou </author>
-/// <lastModified>30-01-2024</lastModified>
+/// <lastModified>02-02-2024</lastModified>
 
 public class FarmBuilding : BuildingScript
 {
-    private string nameResource = "Wheat";
+    private readonly string nameResource = "Wheat";
+    private readonly string buildingType = "Farm";
+
+    private BuildingMenuUI buildingMenu;
 
     protected void Start()
     {
         base.Start();
+        buildingMenu = GameManagerScript.Instance.GetBuildingMenu();
     }
 
     public override void OnButtonClick()
     {
         base.OnButtonClick();
-        ProduceResource(nameResource,1);
-        resourceManager.DisplayResource(nameResource); 
+        
+        buildingMenu.ShowMenu(buildingType);
+        
+        ProduceResource(nameResource);
     }
 }

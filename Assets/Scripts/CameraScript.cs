@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class is used to manage the camera.
+/// </summary>
+/// <author> Maxou </author>
+/// <lastModified>02-02-2024</lastModified>
 
 public class CameraScript : MonoBehaviour
 {
@@ -16,36 +21,33 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private float veloCity = 100f;
     [SerializeField] private float smoothTime = 0.25f;
 
-
     [SerializeField] private SpriteRenderer mapRenderer;
 
     private float mapMinX, mapMaxX, mapMinY, mapMaxY;
 
-
-    private void Awake() {
+    private void Awake() 
+    {
         mapMinX = mapRenderer.transform.position.x - mapRenderer.bounds.size.x / 2f;
         mapMaxX = mapRenderer.transform.position.x + mapRenderer.bounds.size.x / 2f;
 
         mapMinY = mapRenderer.transform.position.y - mapRenderer.bounds.size.y / 2f;
         mapMaxY = mapRenderer.transform.position.y + mapRenderer.bounds.size.y / 2f;
 
-
         zoom = camera.orthographicSize;
-
     }
 
-    private void Update() {
+    private void Update() 
+    {
         PanCamera();
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         zoom -= scroll * zoomMultiplier;
         zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
         camera.orthographicSize = Mathf.SmoothDamp(camera.orthographicSize, zoom, ref veloCity, smoothTime);
-        
     }
 
-    private void PanCamera() {
-
+    private void PanCamera() 
+    {
         if(Input.GetMouseButtonDown(0)) {
             dragOrigin = camera.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -55,10 +57,10 @@ public class CameraScript : MonoBehaviour
 
             camera.transform.position = ClampCamera(camera.transform.position + difference);
         }
-
     }
 
-    private Vector3 ClampCamera(Vector3 targetPositon){
+    private Vector3 ClampCamera(Vector3 targetPositon)
+    {
         float cameraHeight = camera.orthographicSize;
         float cameraWidth = cameraHeight * camera.aspect;
 
@@ -73,9 +75,5 @@ public class CameraScript : MonoBehaviour
 
         return new Vector3(x, y, targetPositon.z);
     }
-
-    
-
-
 
 }

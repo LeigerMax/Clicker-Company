@@ -22,9 +22,9 @@ public class OfflineProgress : MonoBehaviour
             TimeSpan timeAway = currentTime - lastExit;
 
             offlineTimeText.text = string.Format("{0} Days, {1} Hours, {2} Minutes, {3} Seconds", timeAway.Days, timeAway.Hours, timeAway.Minutes, timeAway.Seconds);
-            pointsGainedText.text = (GameObject.FindObjectOfType<GameManagerScript>().idleAmountScript.IdleAmount * timeAway.TotalSeconds).ToString("0.00");
+            pointsGainedText.text = (GameObject.FindObjectOfType<GameManagerScript2>().idleAmountScript.IdleAmount * timeAway.TotalSeconds).ToString("0.00");
 
-            GameObject.FindObjectOfType<GameManagerScript>().money.Money += (float)(GameObject.FindObjectOfType<GameManagerScript>().idleAmountScript.IdleAmount * timeAway.TotalSeconds);
+            GameObject.FindObjectOfType<GameManagerScript2>().money.Money += (float)(GameObject.FindObjectOfType<GameManagerScript2>().idleAmountScript.IdleAmount * timeAway.TotalSeconds);
 
         }
         else
